@@ -156,8 +156,8 @@ $$
 Since $f^\* \equiv 0$, $y_1 = \varepsilon_1$ and $\varepsilon_1$ is
 independent of $\boldsymbol{x}_1$ by assumption. We also assumed that
 $\varepsilon_1$ is standard normal, hence
-$\mathbb{E}y_1^2 = \mathbb{E}\varepsilon_1^2 = \Var(\varepsilon_1) = 1$.
-Hence, 
+$\mathbb{E}y_1^2 = \mathbb{E}\varepsilon_1^2 = \operatorname{Var}(\varepsilon_1) = 1$.
+Therefore, 
 
 $$\begin{aligned}
 \mathcal{E}&= \mathbb{E}_f \mathcal{E}(f) = \left(\mathbb{E}y_1^2\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \\
