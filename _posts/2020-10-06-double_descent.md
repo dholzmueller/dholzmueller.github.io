@@ -39,7 +39,7 @@ tells us that if $f$ interpolates the samples, it would be overfitting
 and therefore a bad estimate. However, interpolating the data can still
 give small $\mathcal{E}(f)$, even with label noise:
 
-![image](images/interp_good.png)
+![image](/images/interp_good.png)
 
 Although putting small spikes around the data points may look silly in
 this example with $d=1$, it would look much more natural in high
@@ -56,19 +56,19 @@ rather badly. For example, common linear models with $p=n$ are barely
 able to interpolate the data, but there is only one interpolating
 solution, and this solution can be quite wiggly:
 
-![image](images/interp_10.png)
+![image](/images/interp_10.png)
 
 In the underparameterized case ($p \ll n$), the linear model is not able
 to interpolate the data and the noise partially cancels out:
 
-![image](images/interp_3.png)
+![image](/images/interp_3.png)
 
 In the overparameterized case ($p \gg n$), there are multiple
 interpolating solutions. The linear model chooses the one with the
 smallest parameter norm, and this choice may provide less overshoots
 than in the case $p = n$:
 
-![image](images/interp_100.png)
+![image](/images/interp_100.png)
 
 In the paper, I show that a large class of linear models performs badly
 for $p \approx n$ when the labels $y_i$ are noisy. The considered linear
@@ -156,14 +156,14 @@ bring the feature map closer to zero away from the data point
 $\boldsymbol{x}_1$. For example, choosing the feature map
 $\phi(x) = e^{-x^2}$ can reduce $\mathcal{E}(f)$ if $x_1 = 0$:
 
-![image](images/single_sample_0.png)
+![image](/images/single_sample_0.png)
 
 The downside is that in our model, the feature map $\phi$ is constant
 and chosen before seeing $\boldsymbol{x}_1$. Therefore, if
 $\boldsymbol{x}_1$ lies somewhere else, the parameter $\beta$ might need
 to be much larger, which can drastically increase $\mathcal{E}(f)$:
 
-![image](images/single_sample_1.png)
+![image](/images/single_sample_1.png)
 
 As another example, assume that $P_X$ is the uniform distribution on
 $[0, 1]$ and our feature map is $\phi(x) = e^x$. Then, $$\begin{aligned}
