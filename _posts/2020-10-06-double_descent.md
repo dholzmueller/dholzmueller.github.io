@@ -24,7 +24,7 @@ function $f: \mathbb{R}^d \to \mathbb{R}$ that "fits the data well". For
 simplicity, we will consider the model where
 $\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n$ are drawn independently
 from an unknown distribution $P_X$ and
-$y_i = f^*(\boldsymbol{x}_i) + \varepsilon_i$, where
+$y_i = f^*(\boldsymbol{x}_i) + \varepsilon_i$ , where
 $f^*: \mathbb{R}^d \to \mathbb{R}$ is the unknown target function and
 $\varepsilon_i$ are independent standard normal noise variables. We
 define the error made by our learned function as
@@ -307,12 +307,15 @@ With these considerations, we can compute our expected determinant as
 $$\begin{aligned}
 \mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= (-1)^n \sum_{\pi \in S_n} (-p)^{|\mathcal{C}(\pi)|} = (-1)^n \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} \cdot (-p)^k \\
 &= (-1)^n (-p)(-p+1) \cdot \ldots \cdot (-p+n-1) \\
-&= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}$$ 
+&= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}
+$$ 
 and another application of the arithmetic-geometric mean inequality from Step 1
 yields $$\begin{aligned}
 (\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &= \left(p(p-1) \cdot \ldots \cdot (p-(n-1))\right)^{1/n} \\
 &\leq \frac{1}{n} (p + (p-1) + \ldots + (p-(n-1))) \\
-&= p - \frac{n-1}{2}~.\end{aligned}$$ Putting this back into the
+&= p - \frac{n-1}{2}~.\end{aligned}$$ 
+
+Putting this back into the
 equation from Step 2 yields 
 $$\begin{aligned}
 \mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}
