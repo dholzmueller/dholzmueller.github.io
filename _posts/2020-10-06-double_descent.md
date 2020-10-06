@@ -290,17 +290,19 @@ $$\begin{aligned}
 In order to calculate $\operatorname{sgn}(\pi)$, we use the known identities
 $$\begin{aligned}
 \operatorname{sgn}(\pi) & = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} \operatorname{sgn}((j_1 j_2 \ldots j_l)) = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}$$
-where we have used in the last equation that the cycle lengths $l$ add
-up to $n$. At this point, it is helpful to use the following
+where we have used in the last equation that the cycle lengths $ l $ add
+up to $ n $. At this point, it is helpful to use the following
 combinatoric fact: The [unsigned Stirling numbers of the first
 kind](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind)
 $$\begin{aligned}
 \begin{bmatrix} n \\ k \end{bmatrix} & = |\{\pi \in S_n : |\mathcal{C}(\pi)| = k\}|\end{aligned}
 $$
+
 for $n > 0, k \geq 0$ satisfy the identity 
 $$\begin{aligned}
 \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}
 $$
+
 for all $x \in \mathbb{R}$.
 
 With these considerations, we can compute our expected determinant as
@@ -309,6 +311,7 @@ $$\begin{aligned}
 &= (-1)^n (-p)(-p+1) \cdot \ldots \cdot (-p+n-1) \\
 &= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}
 $$ 
+
 and another application of the arithmetic-geometric mean inequality from Step 1
 yields $$\begin{aligned}
 (\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &= \left(p(p-1) \cdot \ldots \cdot (p-(n-1))\right)^{1/n} \\
