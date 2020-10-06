@@ -148,7 +148,7 @@ $\beta = \frac{y_1}{\phi(\boldsymbol{x}_1)}$. Of course, this is only
 possible if $\phi(\boldsymbol{x}_1)$ is nonzero. We therefore assume
 that $\phi(\boldsymbol{x}_1)$ is nonzero *almost surely*, that is,
 $\phi(\boldsymbol{x}_1) \neq 0$ with probability $1$. For this estimate,
-the generalization error is
+the corresponding error is
 
 $$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
 $$
