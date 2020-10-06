@@ -28,7 +28,9 @@ $y_i = f^\*(\boldsymbol{x}_i) + \varepsilon_i$ , where
 $f^\*: \mathbb{R}^d \to \mathbb{R}$ is the unknown target function and
 $\varepsilon_i$ are independent standard normal noise variables. We
 define the error made by our learned function as
+
 $$\mathcal{E}(f) :=\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^\*(\boldsymbol{x}))^2~.$$
+
 Although we cannot exactly compute $\mathcal{E}(f)$ since $P_X$ and
 $f^\*$ are unknown, we want $\mathcal{E}(f)$ to be low such that we make
 good predictions on test samples $\boldsymbol{x}$ that are drawn from
