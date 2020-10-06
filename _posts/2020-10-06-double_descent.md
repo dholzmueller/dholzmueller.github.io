@@ -18,28 +18,28 @@ slightly worse result than the proof that made it to the paper.
 
 Suppose that we have a regression problem of the following (typical)
 form: Given $n \geq 1$ samples
-$(\boldsymbol{x}_1, y_1), \hdots, (\boldsymbol{x}_n, y_n)$ with
+$(\boldsymbol{x}_1, y_1), \ldots, (\boldsymbol{x}_n, y_n)$ with
 $\boldsymbol{x}_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$, find a
 function $f: \mathbb{R}^d \to \mathbb{R}$ that "fits the data well". For
 simplicity, we will consider the model where
-$\boldsymbol{x}_1, \hdots, \boldsymbol{x}_n$ are drawn independently
+$\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n$ are drawn independently
 from an unknown distribution $P_X$ and
 $y_i = f^*(\boldsymbol{x}_i) + \varepsilon_i$, where
 $f^*: \mathbb{R}^d \to \mathbb{R}$ is the unknown target function and
 $\varepsilon_i$ are independent standard normal noise variables. We
 define the error made by our learned function as
-$$\mathcal{E}(f) \coloneqq\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2~.$$
+$$\mathcal{E}(f) :=\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2~.$$
 Although we cannot exactly compute $\mathcal{E}(f)$ since $P_X$ and
 $f^*$ are unknown, we want $\mathcal{E}(f)$ to be low such that we make
 good predictions on test samples $\boldsymbol{x}$ that are drawn from
 the same distribution $P_X$ as the training samples
-$\boldsymbol{x}_1, \hdots, \boldsymbol{x}_n$. Since our labels $y_i$ are
+$\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n$. Since our labels $y_i$ are
 noisy due to the corruption by $\varepsilon_i$, conventional wisdom
 tells us that if $f$ interpolates the samples, it would be overfitting
 and therefore a bad estimate. However, interpolating the data can still
 give small $\mathcal{E}(f)$, even with label noise:
 
-![image](images/interp_good.png){width="\textwidth"}
+![image](images/interp_good.png)
 
 Although putting small spikes around the data points may look silly in
 this example with $d=1$, it would look much more natural in high
@@ -56,19 +56,19 @@ rather badly. For example, common linear models with $p=n$ are barely
 able to interpolate the data, but there is only one interpolating
 solution, and this solution can be quite wiggly:
 
-![image](images/interp_10.png){width="\textwidth"}
+![image](images/interp_10.png)
 
 In the underparameterized case ($p \ll n$), the linear model is not able
 to interpolate the data and the noise partially cancels out:
 
-![image](images/interp_3.png){width="\textwidth"}
+![image](images/interp_3.png)
 
 In the overparameterized case ($p \gg n$), there are multiple
 interpolating solutions. The linear model chooses the one with the
 smallest parameter norm, and this choice may provide less overshoots
 than in the case $p = n$:
 
-![image](images/interp_100.png){width="\textwidth"}
+![image](images/interp_100.png)
 
 In the paper, I show that a large class of linear models performs badly
 for $p \approx n$ when the labels $y_i$ are noisy. The considered linear
@@ -97,7 +97,7 @@ of $$\boldsymbol{Z}= \begin{pmatrix}
 \end{pmatrix}~.$$ The function $f$ found in this way is random, since it
 depends on the random draw of the training data. We can therefore define
 the expected error over all random draws of training data sets:
-$$\mathcal{E}\coloneqq\mathbb{E}_f \mathcal{E}(f)~.$$
+$$\mathcal{E}:=\mathbb{E}_f \mathcal{E}(f)~.$$
 
 Suppose that the linear model can interpolate $p$ randomly drawn data
 samples with probability one and that some other weak assumptions are
@@ -156,14 +156,14 @@ bring the feature map closer to zero away from the data point
 $\boldsymbol{x}_1$. For example, choosing the feature map
 $\phi(x) = e^{-x^2}$ can reduce $\mathcal{E}(f)$ if $x_1 = 0$:
 
-![image](images/single_sample_0.png){width="\textwidth"}
+![image](images/single_sample_0.png)
 
 The downside is that in our model, the feature map $\phi$ is constant
 and chosen before seeing $\boldsymbol{x}_1$. Therefore, if
 $\boldsymbol{x}_1$ lies somewhere else, the parameter $\beta$ might need
 to be much larger, which can drastically increase $\mathcal{E}(f)$:
 
-![image](images/single_sample_1.png){width="\textwidth"}
+![image](images/single_sample_1.png)
 
 As another example, assume that $P_X$ is the uniform distribution on
 $[0, 1]$ and our feature map is $\phi(x) = e^x$. Then, $$\begin{aligned}
@@ -195,8 +195,8 @@ But then, $$\begin{aligned}
 
 The generalization of the argument in the last section to general
 $n, p \geq 1$ involves independent random vectors
-$\boldsymbol{w}_1, \hdots, \boldsymbol{w}_n$ and the matrix
-$$\boldsymbol{W}\coloneqq\begin{pmatrix}
+$\boldsymbol{w}_1, \ldots, \boldsymbol{w}_n$ and the matrix
+$$\boldsymbol{W}:=\begin{pmatrix}
 \boldsymbol{w}_1^\top \\
 \vdots \\
 \boldsymbol{w}_n^\top
@@ -220,7 +220,7 @@ but with an interesting argument that involves exactly computing
 $\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)$ using combinatorics.
 
 **Step 1: Arithmetic-Geometric Mean Inequality.** Let
-$a_1, \hdots, a_n > 0$. The function $h = -\log$ is convex and Jensen's
+$a_1, \ldots, a_n > 0$. The function $h = -\log$ is convex and Jensen's
 inequality yields
 $$\frac{1}{n} \sum_{i=1}^n -\log(a_i) \geq -\log\left(\frac{1}{n} \sum_{i=1}^n a_i\right)~.$$
 Applying the decreasing function $g(x) = e^{-x}$ to both sides yields
@@ -229,12 +229,12 @@ $$\left(\prod_{i=1}^n a_i\right)^{1/n} \leq \frac{1}{n} \sum_{i=1}^n a_i~.$$
 
 **Step 2: Jensen again.** For a matrix
 $\boldsymbol{A}\in \mathbb{R}^{n \times n}$, let
-$\lambda_1(\boldsymbol{A}), \hdots, \lambda_n(\boldsymbol{A})$ be the
+$\lambda_1(\boldsymbol{A}), \ldots, \lambda_n(\boldsymbol{A})$ be the
 eigenvalues of $\boldsymbol{A}$. It is well-known that the trace
 satisfies
-$\tr(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) + \hdots + \lambda_n(\boldsymbol{A})$
+$\tr(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) + \ldots + \lambda_n(\boldsymbol{A})$
 and the determinant satisfies
-$\det(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) \cdot \hdots \cdot \lambda_n(\boldsymbol{A})$.
+$\det(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) \cdot \ldots \cdot \lambda_n(\boldsymbol{A})$.
 We know that $\boldsymbol{W}\boldsymbol{W}^\top$ is invertible almost
 surely and therefore also positive definite, hence the eigenvalues of
 $\boldsymbol{W}\boldsymbol{W}^\top$ are positive. We can apply the
@@ -249,7 +249,7 @@ $$\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq n \mathbb{E}\left
 **Step 3: Computing the expected determinant.** We will compute the
 determinant using the [Leibniz
 formula](https://en.wikipedia.org/wiki/Determinant#n_%C3%97_n_matrices),
-which involves permutations on the set $\{1, \hdots, n\}$. The group of
+which involves permutations on the set $\{1, \ldots, n\}$. The group of
 all such permutations is denoted by $S_n$. Each permutation
 $\pi \in S_n$ has an associated signum $\sgn(\pi) \in \{-1, 1\}$. The
 Leibniz formula then states
@@ -272,17 +272,17 @@ We now perform the following rearrangement, which can be applied to all
 of the three cycles: $$\begin{aligned}
 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 = \tr(\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3) = \tr(\boldsymbol{w}_3 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top)\end{aligned}$$
 These arguments apply for general $n$ and $\pi$, yielding the identity
-$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\hdots j_l) \in \mathcal{C}(\pi)} \tr\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \hdots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
+$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
 Now, the products $(\boldsymbol{w}_{j_i} \boldsymbol{w}_{j_i}^\top)$ are
 actually independent and we can pull in the expected value:
 $$\begin{aligned}
-\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\hdots j_l) \in \mathcal{C}(\pi)} \tr\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \hdots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
-&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\hdots j_l) \in \mathcal{C}(\pi)} \tr(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \hdots \cdot \boldsymbol{I}_p) \\
-&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\hdots j_l) \in \mathcal{C}(\pi)} p \\
+\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
+&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
+&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} p \\
 &= \sum_{\pi \in S_n} \sgn(\pi) p^{|\mathcal{C}(\pi)|}~.\end{aligned}$$
 In order to calculate $\sgn(\pi)$, we use the known identities
 $$\begin{aligned}
-\sgn(\pi) & = \prod_{(j_1 j_2 \hdots j_l) \in \mathcal{C}(\pi)} \sgn((j_1 j_2 \hdots j_l)) = \prod_{(j_1 j_2 \hdots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}$$
+\sgn(\pi) & = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} \sgn((j_1 j_2 \ldots j_l)) = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}$$
 where we have used in the last equation that the cycle lengths $l$ add
 up to $n$. At this point, it is helpful to use the following
 combinatoric fact: The [unsigned Stirling numbers of the first
@@ -290,18 +290,18 @@ kind](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind)
 $$\begin{aligned}
 \begin{bmatrix} n \\ k \end{bmatrix} & = |\{\pi \in S_n : |\mathcal{C}(\pi)| = k\}|\end{aligned}$$
 for $n > 0, k \geq 0$ satisfy the identity $$\begin{aligned}
-\sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \hdots \cdot (x+n-1)\end{aligned}$$
+\sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}$$
 for all $x \in \mathbb{R}$.
 
 With these considerations, we can compute our expected determinant as
 $$\begin{aligned}
 \mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= (-1)^n \sum_{\pi \in S_n} (-p)^{|\mathcal{C}(\pi)|} = (-1)^n \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} \cdot (-p)^k \\
-&= (-1)^n (-p)(-p+1) \cdot \hdots \cdot (-p+n-1) \\
-&= p(p-1) \cdot \hdots \cdot (p-(n-1))~,\end{aligned}$$ and another
+&= (-1)^n (-p)(-p+1) \cdot \ldots \cdot (-p+n-1) \\
+&= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}$$ and another
 application of the arithmetic-geometric mean inequality from Step 1
 yields $$\begin{aligned}
-(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &= \left(p(p-1) \cdot \hdots \cdot (p-(n-1))\right)^{1/n} \\
-&\leq \frac{1}{n} (p + (p-1) + \hdots + (p-(n-1))) \\
+(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &= \left(p(p-1) \cdot \ldots \cdot (p-(n-1))\right)^{1/n} \\
+&\leq \frac{1}{n} (p + (p-1) + \ldots + (p-(n-1))) \\
 &= p - \frac{n-1}{2}~.\end{aligned}$$ Putting this back into the
 equation from Step 2 yields $$\begin{aligned}
 \mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}$$
