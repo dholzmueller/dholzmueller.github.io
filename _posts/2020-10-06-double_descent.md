@@ -24,13 +24,13 @@ function $f: \mathbb{R}^d \to \mathbb{R}$ that "fits the data well". For
 simplicity, we will consider the model where
 $\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n$ are drawn independently
 from an unknown distribution $P_X$ and
-$y_i = f^*(\boldsymbol{x}_i) + \varepsilon_i$ , where
-$f^*: \mathbb{R}^d \to \mathbb{R}$ is the unknown target function and
+$y_i = f_{\mathrm{target}}(\boldsymbol{x}_i) + \varepsilon_i$ , where
+$f_{\mathrm{target}}: \mathbb{R}^d \to \mathbb{R}$ is the unknown target function and
 $\varepsilon_i$ are independent standard normal noise variables. We
 define the error made by our learned function as
-$$\mathcal{E}(f) :=\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2~.$$
+$$\mathcal{E}(f) :=\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f_{\mathrm{target}}(\boldsymbol{x}))^2~.$$
 Although we cannot exactly compute $\mathcal{E}(f)$ since $P_X$ and
-$f^*$ are unknown, we want $\mathcal{E}(f)$ to be low such that we make
+$f_{\mathrm{target}}$ are unknown, we want $\mathcal{E}(f)$ to be low such that we make
 good predictions on test samples $\boldsymbol{x}$ that are drawn from
 the same distribution $P_X$ as the training samples
 $\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n$. Since our labels $y_i$ are
@@ -122,11 +122,11 @@ Of course, nobody would expect to get good results with one sample in
 regression, so this case is not particularly interesting from a
 practical perspective, but maybe it is at least possible to pick a
 "lucky" feature map which gives good estimates for one particular target
-function $f^*$?
+function $f_{\mathrm{target}}$?
 
 It can be shown that for linear models, the zero target function
-$f^* \equiv 0$ yields the smallest possible $\mathcal{E}$ among all
-possible target functions. Therefore, we will assume $f^* \equiv 0$ in
+$f_{\mathrm{target}} \equiv 0$ yields the smallest possible $\mathcal{E}$ among all
+possible target functions. Therefore, we will assume $f_{\mathrm{target}} \equiv 0$ in
 the following.
 
 The regression function is
@@ -138,9 +138,9 @@ possible if $\phi(\boldsymbol{x}_1)$ is nonzero. We therefore assume
 that $\phi(\boldsymbol{x}_1)$ is nonzero *almost surely*, that is,
 $\phi(\boldsymbol{x}_1) \neq 0$ with probability $1$. For this estimate,
 the expected test error is
-$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
+$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f_{\mathrm{target}}(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
 $$
-Since $f^* \equiv 0$, $y_1 = \varepsilon_1$ and $\varepsilon_1$ is
+Since $f_{\mathrm{target}} \equiv 0$, $y_1 = \varepsilon_1$ and $\varepsilon_1$ is
 independent of $\boldsymbol{x}_1$ by assumption. We also assumed that
 $\varepsilon_1$ is standard normal, hence
 $\mathbb{E}y_1^2 = \mathbb{E}\varepsilon_1^2 = \Var(\varepsilon_1) = 1$.
@@ -173,7 +173,7 @@ $$\begin{aligned}
 \mathbb{E}_{x \sim P_X} \phi(x)^2 &= \int_0^1 e^{2x} \,\mathrm{d}x = \frac{1}{2}(e^2-1) \\
 \mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2} &= \int_0^1 e^{-2x} \,\mathrm{d}x = \frac{1}{2}(1 - e^{-2})\end{aligned}
 $$
-and since $f^* = 0$, $y_1 = \varepsilon_1$ is independent of $x_1$ with
+and since $f_{\mathrm{target}} = 0$, $y_1 = \varepsilon_1$ is independent of $x_1$ with
 $\mathbb{E}y_1^2 = 1$. Thus,
 $$\mathcal{E}= \left(\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) = \frac{1}{4} (e^2 - 1)(1 - e^{-2}) \approx 1.38~.$$
 
@@ -184,7 +184,7 @@ for $p=n=1$, no feature map $\phi$ yields a lower $\mathcal{E}$ than the
 constant feature map, as long as $\phi(\boldsymbol{x}_1)$ is nonzero
 almost surely: Consider the function
 $h: (0, \infty) \to (0, \infty), u \mapsto 1/u$. This function is convex
-because its second derivative $h''(u) = 2u^{-3}$ is positive for all
+because its second derivative $h^{(2)}(u) = 2u^{-3}$ is positive for all
 $u \in (0, \infty)$. But for convex functions $h$, Jensen's inequality
 tells us that for any random variable $U$, we have
 $$\mathbb{E}h(U) \geq h(\mathbb{E}U)~.$$ Now, pick the random variable
@@ -299,6 +299,7 @@ $$\begin{aligned}
 $$
 
 for $n > 0, k \geq 0$ satisfy the identity 
+
 $$\begin{aligned}
 \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}
 $$
