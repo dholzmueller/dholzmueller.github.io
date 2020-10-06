@@ -191,7 +191,7 @@ $$\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2} = \m
 But then, $$\begin{aligned}
 \mathcal{E}& = \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \geq \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2} \cdot \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2 = 1~.\end{aligned}$$
 
-## A curious proof {#a-curious-proof .unnumbered}
+## A curious proof
 
 The generalization of the argument in the last section to general
 $n, p \geq 1$ involves independent random vectors
@@ -208,14 +208,14 @@ $\mathbb{E}\boldsymbol{w}_i \boldsymbol{w}_i^\top = \boldsymbol{I}_p$,
 where $\boldsymbol{I}_p \in \mathbb{R}^{p \times p}$ is the identity
 matrix. In the overparameterized case $p \geq n$, it is shown in the
 paper that
-$$\mathcal{E}\geq \mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})~,$$
+$$\mathcal{E}\geq \mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})~,$$
 where $\boldsymbol{W}\boldsymbol{W}^\top$ is invertible with probability
 one under the given assumptions in the paper. Step 3.1 in the proof of
 Theorem 3 in Appendix F in the paper then shows that
-$$\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p+1-n} = \frac{n}{p-(n-1)}~.$$
+$$\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p+1-n} = \frac{n}{p-(n-1)}~.$$
 In the following, I will present a different proof showing the weaker
 lower bound
-$$\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p-\frac{n-1}{2}}$$
+$$\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p-\frac{n-1}{2}}$$
 but with an interesting argument that involves exactly computing
 $\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)$ using combinatorics.
 
@@ -232,7 +232,7 @@ $\boldsymbol{A}\in \mathbb{R}^{n \times n}$, let
 $\lambda_1(\boldsymbol{A}), \ldots, \lambda_n(\boldsymbol{A})$ be the
 eigenvalues of $\boldsymbol{A}$. It is well-known that the trace
 satisfies
-$\tr(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) + \ldots + \lambda_n(\boldsymbol{A})$
+$\operatorname{tr}(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) + \ldots + \lambda_n(\boldsymbol{A})$
 and the determinant satisfies
 $\det(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) \cdot \ldots \cdot \lambda_n(\boldsymbol{A})$.
 We know that $\boldsymbol{W}\boldsymbol{W}^\top$ is invertible almost
@@ -240,13 +240,13 @@ surely and therefore also positive definite, hence the eigenvalues of
 $\boldsymbol{W}\boldsymbol{W}^\top$ are positive. We can apply the
 arithmetic-geometric mean inequality to obtain 
 $$\begin{aligned}
-\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & = n\cdot \frac{1}{n} \sum_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \\
+\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & = n\cdot \frac{1}{n} \sum_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \\
 & \geq n \left(\prod_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} \\
 & = n \left(\det((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} = n \left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \\\end{aligned}
 $$
 Using Jensen's inequality with the convex function
 $h: (0, \infty) \to (0, \infty), u \mapsto u^{-1/n}$, we obtain
-$$\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq n \mathbb{E}\left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n}~.$$
+$$\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq n \mathbb{E}\left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n}~.$$
 
 **Step 3: Computing the expected determinant.** We will compute the
 determinant using the [Leibniz
@@ -272,14 +272,14 @@ product according to the cycles yields $$\begin{aligned}
 \prod_{i=1}^6 \boldsymbol{w}_i^\top \boldsymbol{w}_{\pi(i)} &= \boldsymbol{w}_1^\top \boldsymbol{w}_2 \boldsymbol{w}_2^\top \boldsymbol{w}_4 \boldsymbol{w}_4^\top \boldsymbol{w}_1 \cdot \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 \cdot \boldsymbol{w}_5^\top \boldsymbol{w}_5\end{aligned}$$
 We now perform the following rearrangement, which can be applied to all
 of the three cycles: $$\begin{aligned}
-\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 = \tr(\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3) = \tr(\boldsymbol{w}_3 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top)\end{aligned}$$
+\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 = \operatorname{tr}(\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3) = \operatorname{tr}(\boldsymbol{w}_3 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top)\end{aligned}$$
 These arguments apply for general $n$ and $\pi$, yielding the identity
-$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
+$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
 Now, the products $(\boldsymbol{w}_{j_i} \boldsymbol{w}_{j_i}^\top)$ are
 actually independent and we can pull in the expected value:
 $$\begin{aligned}
-\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
-&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \tr(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
+\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
+&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
 &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} p \\
 &= \sum_{\pi \in S_n} \sgn(\pi) p^{|\mathcal{C}(\pi)|}~.\end{aligned}$$
 In order to calculate $\sgn(\pi)$, we use the known identities
@@ -306,4 +306,4 @@ yields $$\begin{aligned}
 &\leq \frac{1}{n} (p + (p-1) + \ldots + (p-(n-1))) \\
 &= p - \frac{n-1}{2}~.\end{aligned}$$ Putting this back into the
 equation from Step 2 yields $$\begin{aligned}
-\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}$$
+\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}$$
