@@ -148,9 +148,9 @@ $\beta = \frac{y_1}{\phi(\boldsymbol{x}_1)}$. Of course, this is only
 possible if $\phi(\boldsymbol{x}_1)$ is nonzero. We therefore assume
 that $\phi(\boldsymbol{x}_1)$ is nonzero *almost surely*, that is,
 $\phi(\boldsymbol{x}_1) \neq 0$ with probability $1$. For this estimate,
-the expected test error is
+the generalization error is
 
-$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^\*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
+$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
 $$
 
 Since $f^\* \equiv 0$, $y_1 = \varepsilon_1$ and $\varepsilon_1$ is
@@ -331,7 +331,7 @@ These arguments apply for general $n$ and $\pi$, yielding the identity
 
 $$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
 
-Now, the products $(\boldsymbol{w}_{j_i} \boldsymbol{w}_{j_i}^\top)$ are
+Now, the products $(\boldsymbol{w}\_{j_i} \boldsymbol{w}\_{j_i}^\top)$ are
 actually independent and we can pull in the expected value:
 
 $$\begin{aligned}
