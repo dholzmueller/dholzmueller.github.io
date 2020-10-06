@@ -1,8 +1,4 @@
----
-author:
-- David Holzmüller
-title: On the Universality of the Double Descent Peak in Ridgeless Regression
----
+# On the Universality of the Double Descent Peak in Ridgeless Regression
 
 I have just uploaded a new paper (<https://arxiv.org/abs/2010.01851>) in
 which I prove that a certain class of linear regression methods always
@@ -16,8 +12,9 @@ determinant of certain random matrices using combinatorics.
 Unfortunately, this proof did not make it to the paper since it gives a
 slightly worse result than the proof that made it to the paper.
 
-Interpolating Methods and Double Descent {#interpolating-methods-and-double-descent .unnumbered}
-========================================
+
+## Interpolating Methods and Double Descent
+
 
 Suppose that we have a regression problem of the following (typical)
 form: Given $n \geq 1$ samples
@@ -77,8 +74,8 @@ In the paper, I show that a large class of linear models performs badly
 for $p \approx n$ when the labels $y_i$ are noisy. The considered linear
 models are defined in the next section.
 
-Linear Regression with Features and a Lower Bound {#linear-regression-with-features-and-a-lower-bound .unnumbered}
-=================================================
+## Linear Regression with Features and a Lower Bound
+
 
 We consider unregularized linear regression with features, where we
 choose a fixed feature map $\phi: \mathbb{R}^d \to \mathbb{R}^p$ for
@@ -115,8 +112,8 @@ under these assumptions, the following holds:
 If the noise $\varepsilon_i$ has a variance other than $1$, the lower
 bounds are scaled proportionally to the variance.
 
-A very simple case {#a-very-simple-case .unnumbered}
-==================
+## A very simple case
+
 
 Here, I want to illustrate some of the main arguments for my lower bound
 in the simplest case with $n = p = 1$, i.e. we have one sample
@@ -194,8 +191,7 @@ $$\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2} = \m
 But then, $$\begin{aligned}
 \mathcal{E}& = \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \geq \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2} \cdot \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2 = 1~.\end{aligned}$$
 
-A curious proof {#a-curious-proof .unnumbered}
-===============
+## A curious proof {#a-curious-proof .unnumbered}
 
 The generalization of the argument in the last section to general
 $n, p \geq 1$ involves independent random vectors
