@@ -138,12 +138,14 @@ possible if $\phi(\boldsymbol{x}_1)$ is nonzero. We therefore assume
 that $\phi(\boldsymbol{x}_1)$ is nonzero *almost surely*, that is,
 $\phi(\boldsymbol{x}_1) \neq 0$ with probability $1$. For this estimate,
 the expected test error is
-$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.$$
+$$\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
+$$
 Since $f^* \equiv 0$, $y_1 = \varepsilon_1$ and $\varepsilon_1$ is
 independent of $\boldsymbol{x}_1$ by assumption. We also assumed that
 $\varepsilon_1$ is standard normal, hence
 $\mathbb{E}y_1^2 = \mathbb{E}\varepsilon_1^2 = \Var(\varepsilon_1) = 1$.
-Hence, $$\begin{aligned}
+Hence, 
+$$\begin{aligned}
 \mathcal{E}&= \mathbb{E}_f \mathcal{E}(f) = \left(\mathbb{E}y_1^2\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \\
 &= \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right)~.\end{aligned}$$
 
@@ -166,9 +168,11 @@ to be much larger, which can drastically increase $\mathcal{E}(f)$:
 ![image](/images/single_sample_1.png)
 
 As another example, assume that $P_X$ is the uniform distribution on
-$[0, 1]$ and our feature map is $\phi(x) = e^x$. Then, $$\begin{aligned}
+$[0, 1]$ and our feature map is $\phi(x) = e^x$. Then, 
+$$\begin{aligned}
 \mathbb{E}_{x \sim P_X} \phi(x)^2 &= \int_0^1 e^{2x} \,\mathrm{d}x = \frac{1}{2}(e^2-1) \\
-\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2} &= \int_0^1 e^{-2x} \,\mathrm{d}x = \frac{1}{2}(1 - e^{-2})\end{aligned}$$
+\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2} &= \int_0^1 e^{-2x} \,\mathrm{d}x = \frac{1}{2}(1 - e^{-2})\end{aligned}
+$$
 and since $f^* = 0$, $y_1 = \varepsilon_1$ is independent of $x_1$ with
 $\mathbb{E}y_1^2 = 1$. Thus,
 $$\mathcal{E}= \left(\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) = \frac{1}{4} (e^2 - 1)(1 - e^{-2}) \approx 1.38~.$$
@@ -188,7 +192,8 @@ $U = \phi(\boldsymbol{x}_1)^2$. By our assumption, $U \in (0, \infty)$
 holds with probability $1$, hence $U$ is in the domain of our function
 $h$ with probability one. Jensen's inequality then yields
 $$\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2} = \mathbb{E}h(U) \geq h(\mathbb{E}U) = \frac{1}{\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \phi(\boldsymbol{x}_1)^2} = \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2}~.$$
-But then, $$\begin{aligned}
+But then, 
+$$\begin{aligned}
 \mathcal{E}& = \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \geq \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2} \cdot \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2 = 1~.\end{aligned}$$
 
 ## A curious proof
@@ -253,9 +258,9 @@ determinant using the [Leibniz
 formula](https://en.wikipedia.org/wiki/Determinant#n_%C3%97_n_matrices),
 which involves permutations on the set $\{1, \ldots, n\}$. The group of
 all such permutations is denoted by $S_n$. Each permutation
-$\pi \in S_n$ has an associated signum $\sgn(\pi) \in \{-1, 1\}$. The
+$\pi \in S_n$ has an associated signum $\operatorname{sgn}(\pi) \in \{-1, 1\}$. The
 Leibniz formula then states
-$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{i=1}^n (\boldsymbol{W}\boldsymbol{W}^\top)_{i, \pi(i)} = \sum_{\pi \in S_n} \sgn(\pi) \prod_{i=1}^n \boldsymbol{w}_i^\top \boldsymbol{w}_{\pi(i)}~.$$
+$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{i=1}^n (\boldsymbol{W}\boldsymbol{W}^\top)_{i, \pi(i)} = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{i=1}^n \boldsymbol{w}_i^\top \boldsymbol{w}_{\pi(i)}~.$$
 Now, the expectation over $\boldsymbol{W}$ can be interchanged with the
 sum on the right-hand side, but not with the product, since the terms in
 the product are not independent. In order to break the product into
@@ -274,36 +279,41 @@ We now perform the following rearrangement, which can be applied to all
 of the three cycles: $$\begin{aligned}
 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 = \operatorname{tr}(\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3) = \operatorname{tr}(\boldsymbol{w}_3 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top)\end{aligned}$$
 These arguments apply for general $n$ and $\pi$, yielding the identity
-$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
+$$\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.$$
 Now, the products $(\boldsymbol{w}_{j_i} \boldsymbol{w}_{j_i}^\top)$ are
 actually independent and we can pull in the expected value:
 $$\begin{aligned}
-\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
-&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
-&= \sum_{\pi \in S_n} \sgn(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} p \\
-&= \sum_{\pi \in S_n} \sgn(\pi) p^{|\mathcal{C}(\pi)|}~.\end{aligned}$$
-In order to calculate $\sgn(\pi)$, we use the known identities
+\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
+&= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
+&= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} p \\
+&= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) p^{|\mathcal{C}(\pi)|}~.\end{aligned}$$
+In order to calculate $\operatorname{sgn}(\pi)$, we use the known identities
 $$\begin{aligned}
-\sgn(\pi) & = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} \sgn((j_1 j_2 \ldots j_l)) = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}$$
+\operatorname{sgn}(\pi) & = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} \operatorname{sgn}((j_1 j_2 \ldots j_l)) = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}$$
 where we have used in the last equation that the cycle lengths $l$ add
 up to $n$. At this point, it is helpful to use the following
 combinatoric fact: The [unsigned Stirling numbers of the first
 kind](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind)
 $$\begin{aligned}
-\begin{bmatrix} n \\ k \end{bmatrix} & = |\{\pi \in S_n : |\mathcal{C}(\pi)| = k\}|\end{aligned}$$
-for $n > 0, k \geq 0$ satisfy the identity $$\begin{aligned}
-\sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}$$
+\begin{bmatrix} n \\ k \end{bmatrix} & = |\{\pi \in S_n : |\mathcal{C}(\pi)| = k\}|\end{aligned}
+$$
+for $n > 0, k \geq 0$ satisfy the identity 
+$$\begin{aligned}
+\sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}
+$$
 for all $x \in \mathbb{R}$.
 
 With these considerations, we can compute our expected determinant as
 $$\begin{aligned}
 \mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &= (-1)^n \sum_{\pi \in S_n} (-p)^{|\mathcal{C}(\pi)|} = (-1)^n \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} \cdot (-p)^k \\
 &= (-1)^n (-p)(-p+1) \cdot \ldots \cdot (-p+n-1) \\
-&= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}$$ and another
-application of the arithmetic-geometric mean inequality from Step 1
+&= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}$$ 
+and another application of the arithmetic-geometric mean inequality from Step 1
 yields $$\begin{aligned}
 (\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &= \left(p(p-1) \cdot \ldots \cdot (p-(n-1))\right)^{1/n} \\
 &\leq \frac{1}{n} (p + (p-1) + \ldots + (p-(n-1))) \\
 &= p - \frac{n-1}{2}~.\end{aligned}$$ Putting this back into the
-equation from Step 2 yields $$\begin{aligned}
-\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}$$
+equation from Step 2 yields 
+$$\begin{aligned}
+\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p + \frac{n-1}{2}}~.\end{aligned}
+$$
