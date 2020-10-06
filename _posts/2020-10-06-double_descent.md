@@ -238,10 +238,12 @@ $\det(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) \cdot \ldots \cdot \lambda_n(\
 We know that $\boldsymbol{W}\boldsymbol{W}^\top$ is invertible almost
 surely and therefore also positive definite, hence the eigenvalues of
 $\boldsymbol{W}\boldsymbol{W}^\top$ are positive. We can apply the
-arithmetic-geometric mean inequality to obtain $$\begin{aligned}
+arithmetic-geometric mean inequality to obtain 
+$$\begin{aligned}
 \tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) & = n\cdot \frac{1}{n} \sum_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \\
 & \geq n \left(\prod_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} \\
-& = n \left(\det((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} = n \left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \\\end{aligned}$$
+& = n \left(\det((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} = n \left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \\\end{aligned}
+$$
 Using Jensen's inequality with the convex function
 $h: (0, \infty) \to (0, \infty), u \mapsto u^{-1/n}$, we obtain
 $$\mathbb{E}\tr((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq n \mathbb{E}\left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n}~.$$
