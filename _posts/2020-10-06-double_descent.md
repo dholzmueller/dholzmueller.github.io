@@ -236,7 +236,7 @@ $$\boldsymbol{W}:=\begin{pmatrix}
 \end{pmatrix}~.$$
 
 In the case $p = 1$, we have
-$w_i = \frac{\phi(\boldsymbol{x}_i)}{\sqrt{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2}}$,
+$w_i = \frac{\phi(\boldsymbol{x}\_i)}{\sqrt{\mathbb{E}\_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2}}$,
 which yields $\mathbb{E}w_i^2 = 1$. The analogous definition for
 $p \geq 1$ can be found in the paper and yields
 $\mathbb{E}\boldsymbol{w}_i \boldsymbol{w}_i^\top = \boldsymbol{I}_p$,
