@@ -118,7 +118,7 @@ under these assumptions, the following holds:
 
 -   If $p \geq n$, then $\mathcal{E}\geq \frac{n}{p+1-n}$.
 
--   If $p < n$, then $\mathcal{E}\geq \frac{p}{n}$.
+-   If $p < n$, then $\mathcal{E}\geq \frac{p}{n+1-p}$.
 
 If the noise $\varepsilon_i$ has a variance other than $1$, the lower
 bounds are scaled proportionally to the variance.
