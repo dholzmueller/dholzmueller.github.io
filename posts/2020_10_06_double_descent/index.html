@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David Holzmüller">
+<meta name="dcterms.date" content="2020-10-06">
+
+<title>David Holzmüller - On the Universality of the Double Descent Peak in Ridgeless Regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="David Holzmüller - On the Universality of the Double Descent Peak in Ridgeless Regression">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="interp_100.png">
+<meta name="twitter:creator" content="@DHolzmueller">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">David Holzmüller</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dholzmueller"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DHolzmueller"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://sigmoid.social/@dholzmueller"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/david-holzm%C3%BCller-164a9b256/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">On the Universality of the Double Descent Peak in Ridgeless Regression</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">theory</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>David Holzmüller </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 6, 2020</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>I have just uploaded a new paper (<a href="https://arxiv.org/abs/2010.01851" class="uri">https://arxiv.org/abs/2010.01851</a>) in which I prove that a certain class of linear regression methods always performs badly on noisy data when the number of model parameters is close to the number of data points. This blog post is <em>not</em> a summary of the paper. Instead, I want to provide some intuition with simple examples and show some aspects of the proof strategy in a simplified setting. After this simplified analysis, I will show a proof that I find quite amusing, in particular because it involves computing the expected determinant of certain random matrices using combinatorics. Unfortunately, this proof did not make it to the paper since it gives a slightly worse result than the proof that made it to the paper.</p>
+<section id="interpolating-methods-and-double-descent" class="level2">
+<h2 class="anchored" data-anchor-id="interpolating-methods-and-double-descent">Interpolating Methods and Double Descent</h2>
+<p>Suppose that we have a regression problem of the following (typical) form: Given <span class="math inline">\(n \geq 1\)</span> samples <span class="math inline">\((\boldsymbol{x}_1, y_1), \ldots, (\boldsymbol{x}_n, y_n)\)</span> with <span class="math inline">\(\boldsymbol{x}_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \mathbb{R}\)</span>, find a function <span class="math inline">\(f: \mathbb{R}^d \to \mathbb{R}\)</span> that “fits the data well”. For simplicity, we will consider the model where <span class="math inline">\(\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n\)</span> are drawn independently from an unknown distribution <span class="math inline">\(P_X\)</span> and <span class="math inline">\(y_i = f^*(\boldsymbol{x}_i) + \varepsilon_i\)</span>, where <span class="math inline">\(f^*: \mathbb{R}^d \to \mathbb{R}\)</span> is the unknown target function and <span class="math inline">\(\varepsilon_i\)</span> are independent standard normal noise variables. We define the error made by our learned function as</p>
+<p><span class="math display">\[\mathcal{E}(f) :=\mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2~.\]</span></p>
+<p>Although we cannot exactly compute <span class="math inline">\(\mathcal{E}(f)\)</span> since <span class="math inline">\(P_X\)</span> and <span class="math inline">\(f^*\)</span> are unknown, we want <span class="math inline">\(\mathcal{E}(f)\)</span> to be low such that we make good predictions on test samples <span class="math inline">\(\boldsymbol{x}\)</span> that are drawn from the same distribution <span class="math inline">\(P_X\)</span> as the training samples <span class="math inline">\(\boldsymbol{x}_1, \ldots, \boldsymbol{x}_n\)</span>. Since our labels <span class="math inline">\(y_i\)</span> are noisy due to the corruption by <span class="math inline">\(\varepsilon_i\)</span>, conventional wisdom tells us that if <span class="math inline">\(f\)</span> interpolates the samples, it would be overfitting and therefore a bad estimate. However, interpolating the data can still give small <span class="math inline">\(\mathcal{E}(f)\)</span>, even with label noise:</p>
+<p><img src="interp_good.png" class="img-fluid"></p>
+<p>Although putting small spikes around the data points may look silly in this example with <span class="math inline">\(d=1\)</span>, it would look much more natural in high dimensions <span class="math inline">\(d\)</span> where the samples <span class="math inline">\(\boldsymbol{x}_i\)</span> can all have large distance from each other and the spikes can be much wider without affecting <span class="math inline">\(\mathcal{E}(f)\)</span> much. Indeed, modern neural networks can often achieve good generalization performance despite being so large that they can interpolate the data.</p>
+<p>Research around the “Double Descent” phenomenon has found that in various settings with <em>few to no regularization</em>, ML methods whose number of parameters <span class="math inline">\(p\)</span> is close to the number of samples <span class="math inline">\(n\)</span> perform rather badly. For example, common linear models with <span class="math inline">\(p=n\)</span> are barely able to interpolate the data, but there is only one interpolating solution, and this solution can be quite wiggly:</p>
+<p><img src="interp_10.png" class="img-fluid"></p>
+<p>In the underparameterized case (<span class="math inline">\(p \ll n\)</span>), the linear model is not able to interpolate the data and the noise partially cancels out:</p>
+<p><img src="interp_3.png" class="img-fluid"></p>
+<p>In the overparameterized case (<span class="math inline">\(p \gg n\)</span>), there are multiple interpolating solutions. The linear model chooses the one with the smallest parameter norm, and this choice may provide less overshoots than in the case <span class="math inline">\(p = n\)</span>:</p>
+<p><img src="interp_100.png" class="img-fluid"></p>
+<p>In the paper, I show that a large class of linear models performs badly for <span class="math inline">\(p \approx n\)</span> when the labels <span class="math inline">\(y_i\)</span> are noisy. The considered linear models are defined in the next section.</p>
+</section>
+<section id="linear-regression-with-features-and-a-lower-bound" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-with-features-and-a-lower-bound">Linear Regression with Features and a Lower Bound</h2>
+<p>We consider unregularized linear regression with features, where we choose a fixed feature map <span class="math inline">\(\phi: \mathbb{R}^d \to \mathbb{R}^p\)</span> for some number of parameters <span class="math inline">\(p\)</span> and then learn the parameters <span class="math inline">\(\boldsymbol{\beta}\in \mathbb{R}^p\)</span> for the function <span class="math inline">\(f(\boldsymbol{x}) = \boldsymbol{\beta}^\top \phi(\boldsymbol{x})\)</span>. The parameters <span class="math inline">\(\boldsymbol{\beta}\)</span> are chosen to minimize the training error</p>
+<p><span class="math display">\[\frac{1}{n} \sum_{i=1}^n (f(\boldsymbol{x}_i) - y_i)^2~.\]</span></p>
+<p>In case that there are multiple optimal parameters <span class="math inline">\(\boldsymbol{\beta}\)</span>, the one with minimum Euclidean norm is chosen. This procedure can be expressed as an equation: <span class="math inline">\(\boldsymbol{\beta}= \boldsymbol{Z}^+ \boldsymbol{y}\)</span>, where <span class="math inline">\(\boldsymbol{Z}^+\)</span> is the <a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse">Moore-Penrose pseudoinverse</a> of</p>
+<p><span class="math display">\[\boldsymbol{Z}= \begin{pmatrix}
+\phi(\boldsymbol{x}_1)^\top \\
+\vdots \\
+\phi(\boldsymbol{x}_n)^\top
+\end{pmatrix}~.\]</span></p>
+<p>The function <span class="math inline">\(f\)</span> found in this way is random, since it depends on the random draw of the training data. We can therefore define the expected error over all random draws of training data sets:</p>
+<p><span class="math display">\[\mathcal{E}:=\mathbb{E}_f \mathcal{E}(f)~.\]</span></p>
+<p>Suppose that the linear model can interpolate <span class="math inline">\(p\)</span> randomly drawn data samples with probability one and that some other weak assumptions are satisfied. I show in the paper that many feature maps <span class="math inline">\(\phi\)</span> and input distributions <span class="math inline">\(P_X\)</span> satisfy these assumptions. In my paper, I prove that under these assumptions, the following holds:</p>
+<ul>
+<li><p>If <span class="math inline">\(p \geq n\)</span>, then <span class="math inline">\(\mathcal{E}\geq \frac{n}{p+1-n}\)</span>.</p></li>
+<li><p>If <span class="math inline">\(p &lt; n\)</span>, then <span class="math inline">\(\mathcal{E}\geq \frac{p}{n+1-p}\)</span>.</p></li>
+</ul>
+<p>If the noise <span class="math inline">\(\varepsilon_i\)</span> has a variance other than <span class="math inline">\(1\)</span>, the lower bounds are scaled proportionally to the variance.</p>
+</section>
+<section id="a-very-simple-case" class="level2">
+<h2 class="anchored" data-anchor-id="a-very-simple-case">A very simple case</h2>
+<p>Here, I want to illustrate some of the main arguments for my lower bound in the simplest case with <span class="math inline">\(n = p = 1\)</span>, i.e.&nbsp;we have one sample <span class="math inline">\((\boldsymbol{x}_1, y_1)\)</span> with <span class="math inline">\(\phi(\boldsymbol{x}_i) \in \mathbb{R}\)</span>. Of course, nobody would expect to get good results with one sample in regression, so this case is not particularly interesting from a practical perspective, but maybe it is at least possible to pick a “lucky” feature map which gives good estimates for one particular target function <span class="math inline">\(f^*\)</span>?</p>
+<p>It can be shown that for linear models, the zero target function <span class="math inline">\(f^* \equiv 0\)</span> yields the smallest possible <span class="math inline">\(\mathcal{E}\)</span> among all possible target functions. Therefore, we will assume <span class="math inline">\(f^* \equiv 0\)</span> in the following.</p>
+<p>The regression function is <span class="math inline">\(f(\boldsymbol{x}) = \beta \phi(\boldsymbol{x})\)</span>. In order to interpolate the single datapoint <span class="math inline">\((\boldsymbol{x}_1, y_1)\)</span>, the parameter <span class="math inline">\(\beta\)</span> must satisfy <span class="math inline">\(y_1 = \beta \phi(\boldsymbol{x}_1)\)</span>, or <span class="math inline">\(\beta = \frac{y_1}{\phi(\boldsymbol{x}_1)}\)</span>. Of course, this is only possible if <span class="math inline">\(\phi(\boldsymbol{x}_1)\)</span> is nonzero. We therefore assume that <span class="math inline">\(\phi(\boldsymbol{x}_1)\)</span> is nonzero <em>almost surely</em>, that is, <span class="math inline">\(\phi(\boldsymbol{x}_1) \neq 0\)</span> with probability <span class="math inline">\(1\)</span>. For this estimate, the corresponding error is</p>
+<p><span class="math display">\[\mathcal{E}(f) = \mathbb{E}_{\boldsymbol{x}\sim P_X} (f(\boldsymbol{x}) - f^*(\boldsymbol{x}))^2 = \mathbb{E}_{\boldsymbol{x}\sim P_X} \beta^2 \phi(\boldsymbol{x})^2 = \frac{y_1^2}{\phi(\boldsymbol{x}_1)^2} \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2~.
+\]</span></p>
+<p>Since <span class="math inline">\(f^* \equiv 0\)</span>, <span class="math inline">\(y_1 = \varepsilon_1\)</span> and <span class="math inline">\(\varepsilon_1\)</span> is independent of <span class="math inline">\(\boldsymbol{x}_1\)</span> by assumption. We also assumed that <span class="math inline">\(\varepsilon_1\)</span> is standard normal, hence <span class="math inline">\(\mathbb{E}y_1^2 = \mathbb{E}\varepsilon_1^2 = \operatorname{Var}(\varepsilon_1) = 1\)</span>. Therefore,</p>
+<p><span class="math display">\[\begin{aligned}
+\mathcal{E}&amp;= \mathbb{E}_f \mathcal{E}(f) = \left(\mathbb{E}y_1^2\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \\
+&amp;= \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right)~.\end{aligned}\]</span></p>
+<p>A very simple feature map is the constant feature map with <span class="math inline">\(\phi(\boldsymbol{x}) = 1\)</span> for all <span class="math inline">\(\boldsymbol{x}\)</span>. For this feature map, we immediately obtain</p>
+<p><span class="math display">\[\mathcal{E}= 1 \cdot 1 = 1~.\]</span></p>
+<p>For the constant feature map, our interpolating function <span class="math inline">\(f(x)\)</span> is always constant. In an attempt to decrease <span class="math inline">\(\mathcal{E}\)</span>, one might try to bring the feature map closer to zero away from the data point <span class="math inline">\(\boldsymbol{x}_1\)</span>. For example, choosing the feature map <span class="math inline">\(\phi(x) = e^{-x^2}\)</span> can reduce <span class="math inline">\(\mathcal{E}(f)\)</span> if <span class="math inline">\(x_1 = 0\)</span>:</p>
+<p><img src="single_sample_0.png" class="img-fluid"></p>
+<p>The downside is that in our model, the feature map <span class="math inline">\(\phi\)</span> is constant and chosen before seeing <span class="math inline">\(\boldsymbol{x}_1\)</span>. Therefore, if <span class="math inline">\(\boldsymbol{x}_1\)</span> lies somewhere else, the parameter <span class="math inline">\(\beta\)</span> might need to be much larger, which can drastically increase <span class="math inline">\(\mathcal{E}(f)\)</span>:</p>
+<p><img src="single_sample_1.png" class="img-fluid"></p>
+<p>As another example, assume that <span class="math inline">\(P_X\)</span> is the uniform distribution on <span class="math inline">\([0, 1]\)</span> and our feature map is <span class="math inline">\(\phi(x) = e^x\)</span>. Then,</p>
+<p><span class="math display">\[\begin{aligned}
+\mathbb{E}_{x \sim P_X} \phi(x)^2 &amp;= \int_0^1 e^{2x} \,\mathrm{d}x = \frac{1}{2}(e^2-1) \\
+\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2} &amp;= \int_0^1 e^{-2x} \,\mathrm{d}x = \frac{1}{2}(1 - e^{-2})\end{aligned}
+\]</span></p>
+<p>and since <span class="math inline">\(f^* = 0\)</span>, <span class="math inline">\(y_1 = \varepsilon_1\)</span> is independent of <span class="math inline">\(x_1\)</span> with <span class="math inline">\(\mathbb{E}y_1^2 = 1\)</span>. Thus,</p>
+<p><span class="math display">\[\mathcal{E}= \left(\mathbb{E}_{x_1 \sim P_X} \frac{1}{\phi(x_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) = \frac{1}{4} (e^2 - 1)(1 - e^{-2}) \approx 1.38~.\]</span></p>
+<p>We have seen that for the exponential feature map, <span class="math inline">\(\mathcal{E}\)</span> was larger than for the constant feature map, at least for this particular input distribution <span class="math inline">\(P_X\)</span>. We can use <em>Jensen’s inequality</em> to show that for <span class="math inline">\(p=n=1\)</span>, no feature map <span class="math inline">\(\phi\)</span> yields a lower <span class="math inline">\(\mathcal{E}\)</span> than the constant feature map, as long as <span class="math inline">\(\phi(\boldsymbol{x}_1)\)</span> is nonzero almost surely: Consider the function <span class="math inline">\(h: (0, \infty) \to (0, \infty), u \mapsto 1/u\)</span>. This function is convex because its second derivative <span class="math inline">\(h^{(2)}(u) = 2u^{-3}\)</span> is positive for all <span class="math inline">\(u \in (0, \infty)\)</span>. But for convex functions <span class="math inline">\(h\)</span>, Jensen’s inequality tells us that for any random variable <span class="math inline">\(U\)</span>, we have</p>
+<p><span class="math display">\[\mathbb{E}h(U) \geq h(\mathbb{E}U)~.\]</span></p>
+<p>Now, pick the random variable <span class="math inline">\(U = \phi(\boldsymbol{x}_1)^2\)</span>. By our assumption, <span class="math inline">\(U \in (0, \infty)\)</span> holds with probability <span class="math inline">\(1\)</span>, hence <span class="math inline">\(U\)</span> is in the domain of our function <span class="math inline">\(h\)</span> with probability one. Jensen’s inequality then yields</p>
+<p><span class="math display">\[\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2} = \mathbb{E}h(U) \geq h(\mathbb{E}U) = \frac{1}{\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \phi(\boldsymbol{x}_1)^2} = \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2}~.\]</span></p>
+<p>But then,</p>
+<p><span class="math display">\[\begin{aligned}
+\mathcal{E}&amp; = \left(\mathbb{E}_{\boldsymbol{x}_1 \sim P_X} \frac{1}{\phi(\boldsymbol{x}_1)^2}\right) \cdot \left(\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2\right) \geq \frac{1}{\mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2} \cdot \mathbb{E}_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2 = 1~.\end{aligned}\]</span></p>
+</section>
+<section id="a-curious-proof" class="level2">
+<h2 class="anchored" data-anchor-id="a-curious-proof">A curious proof</h2>
+<p>The generalization of the argument in the last section to general <span class="math inline">\(n, p \geq 1\)</span> involves independent random vectors <span class="math inline">\(\boldsymbol{w}_1, \ldots, \boldsymbol{w}_n\)</span> and the matrix</p>
+<p><span class="math display">\[\boldsymbol{W}:=\begin{pmatrix}
+\boldsymbol{w}_1^\top \\
+\vdots \\
+\boldsymbol{w}_n^\top
+\end{pmatrix}~.\]</span></p>
+<p>In the case <span class="math inline">\(p = 1\)</span>, we have <span class="math inline">\(w_i = \frac{\phi(\boldsymbol{x}\_i)}{\sqrt{\mathbb{E}\_{\boldsymbol{x}\sim P_X} \phi(\boldsymbol{x})^2}}\)</span>, which yields <span class="math inline">\(\mathbb{E}w_i^2 = 1\)</span>. The analogous definition for <span class="math inline">\(p \geq 1\)</span> can be found in the paper and yields <span class="math inline">\(\mathbb{E}\boldsymbol{w}_i \boldsymbol{w}_i^\top = \boldsymbol{I}_p\)</span>, where <span class="math inline">\(\boldsymbol{I}_p \in \mathbb{R}^{p \times p}\)</span> is the identity matrix. In the overparameterized case <span class="math inline">\(p \geq n\)</span>, it is shown in the paper that</p>
+<p><span class="math display">\[\mathcal{E}\geq \mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})~,\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{W}\boldsymbol{W}^\top\)</span> is invertible with probability one under the given assumptions in the paper. Step 3.1 in the proof of Theorem 3 in Appendix F in the paper then shows that</p>
+<p><span class="math display">\[\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p+1-n} = \frac{n}{p-(n-1)}~.\]</span></p>
+<p>In the following, I will present a different proof showing the weaker lower bound</p>
+<p><span class="math display">\[\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq \frac{n}{p-\frac{n-1}{2}}\]</span></p>
+<p>but with an interesting argument that involves exactly computing <span class="math inline">\(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\)</span> using combinatorics.</p>
+<p><strong>Step 1: Arithmetic-Geometric Mean Inequality.</strong> Let <span class="math inline">\(a_1, \ldots, a_n &gt; 0\)</span>. The function <span class="math inline">\(h = -\log\)</span> is convex and Jensen’s inequality yields</p>
+<p><span class="math display">\[\frac{1}{n} \sum_{i=1}^n -\log(a_i) \geq -\log\left(\frac{1}{n} \sum_{i=1}^n a_i\right)~.\]</span></p>
+<p>Applying the decreasing function <span class="math inline">\(g(x) = e^{-x}\)</span> to both sides yields the well-known inequality between arithmetic and geometric mean:</p>
+<p><span class="math display">\[\left(\prod_{i=1}^n a_i\right)^{1/n} \leq \frac{1}{n} \sum_{i=1}^n a_i~.\]</span></p>
+<p><strong>Step 2: Jensen again.</strong> For a matrix <span class="math inline">\(\boldsymbol{A}\in \mathbb{R}^{n \times n}\)</span>, let <span class="math inline">\(\lambda_1(\boldsymbol{A}), \ldots, \lambda_n(\boldsymbol{A})\)</span> be the eigenvalues of <span class="math inline">\(\boldsymbol{A}\)</span>. It is well-known that the trace satisfies <span class="math inline">\(\operatorname{tr}(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) + \ldots + \lambda_n(\boldsymbol{A})\)</span> and the determinant satisfies <span class="math inline">\(\det(\boldsymbol{A}) = \lambda_1(\boldsymbol{A}) \cdot \ldots \cdot \lambda_n(\boldsymbol{A})\)</span>. We know that <span class="math inline">\(\boldsymbol{W}\boldsymbol{W}^\top\)</span> is invertible almost surely and therefore also positive definite, hence the eigenvalues of <span class="math inline">\(\boldsymbol{W}\boldsymbol{W}^\top\)</span> are positive. We can apply the arithmetic-geometric mean inequality to obtain</p>
+<p><span class="math display">\[\begin{aligned}
+\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) &amp; = n\cdot \frac{1}{n} \sum_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \\
+&amp; \geq n \left(\prod_{i=1}^n \lambda_{i}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} \\
+&amp; = n \left(\det((\boldsymbol{W}\boldsymbol{W}^\top)^{-1})\right)^{1/n} = n \left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \\\end{aligned} \]</span></p>
+<p>Using Jensen’s inequality with the convex function <span class="math inline">\(h: (0, \infty) \to (0, \infty), u \mapsto u^{-1/n}\)</span>, we obtain</p>
+<p><span class="math display">\[\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) \geq n \mathbb{E}\left(\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n}~.\]</span></p>
+<p><strong>Step 3: Computing the expected determinant.</strong> We will compute the determinant using the <a href="https://en.wikipedia.org/wiki/Determinant#n_%C3%97_n_matrices">Leibniz formula</a>, which involves permutations on the set <span class="math inline">\(\{1, \ldots, n\}\)</span>. The group of all such permutations is denoted by <span class="math inline">\(S_n\)</span>. Each permutation <span class="math inline">\(\pi \in S_n\)</span> has an associated signum <span class="math inline">\(\operatorname{sgn}(\pi) \in \{-1, 1\}\)</span>. The Leibniz formula then states</p>
+<p><span class="math display">\[\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{i=1}^n (\boldsymbol{W}\boldsymbol{W}^\top)_{i, \pi(i)} = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{i=1}^n \boldsymbol{w}_i^\top \boldsymbol{w}_{\pi(i)}~.\]</span></p>
+<p>Now, the expectation over <span class="math inline">\(\boldsymbol{W}\)</span> can be interchanged with the sum on the right-hand side, but not with the product, since the terms in the product are not independent. In order to break the product into independent components, we need to take the structure of the permutation <span class="math inline">\(\pi\)</span> into account. Each permutation <span class="math inline">\(\pi \in S_n\)</span> can be broken down into a set of disjoint <a href="https://en.wikipedia.org/wiki/Permutation#Cycle_notation">cycles</a> <span class="math inline">\(\mathcal{C}(\pi)\)</span> such that <span class="math inline">\(\pi\)</span> is the product of its cycles. Consider for example the case where <span class="math inline">\(n = 6\)</span>, <span class="math inline">\(\pi(1) = 2, \pi(2) = 4, \pi(3) = 6, \pi(4) = 1, \pi(5) = 5\)</span> and <span class="math inline">\(\pi(6) = 3\)</span>. We would then write <span class="math inline">\(\mathcal{C}(\pi) = \{(124), (36), (5)\}\)</span>. In our example, arranging our product according to the cycles yields</p>
+<p><span class="math display">\[\begin{aligned}
+\prod_{i=1}^6 \boldsymbol{w}_i^\top \boldsymbol{w}_{\pi(i)} &amp;= \boldsymbol{w}_1^\top \boldsymbol{w}_2 \boldsymbol{w}_2^\top \boldsymbol{w}_4 \boldsymbol{w}_4^\top \boldsymbol{w}_1 \cdot \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 \cdot \boldsymbol{w}_5^\top \boldsymbol{w}_5\end{aligned}\]</span></p>
+<p>We now perform the following rearrangement, which can be applied to all of the three cycles:</p>
+<p><span class="math display">\[\begin{aligned}
+\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3 = \operatorname{tr}(\boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top \boldsymbol{w}_3) = \operatorname{tr}(\boldsymbol{w}_3 \boldsymbol{w}_3^\top \boldsymbol{w}_6 \boldsymbol{w}_6^\top)\end{aligned}\]</span></p>
+<p>These arguments apply for general <span class="math inline">\(n\)</span> and <span class="math inline">\(\pi\)</span>, yielding the identity</p>
+<p><span class="math display">\[\det(\boldsymbol{W}\boldsymbol{W}^\top) = \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right)~.\]</span></p>
+<p>Now, the products <span class="math inline">\((\boldsymbol{w}_{j_i} \boldsymbol{w}_{j_i}^\top)\)</span> are actually independent and we can pull in the expected value:</p>
+<p><span class="math display">\[\begin{aligned}
+\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &amp;= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}\left((\mathbb{E}\boldsymbol{w}_{j_1} \boldsymbol{w}_{j_1}^\top) (\mathbb{E}\boldsymbol{w}_{j_2} \boldsymbol{w}_{j_2}^\top) \ldots (\mathbb{E}\boldsymbol{w}_{j_l} \boldsymbol{w}_{j_l}^\top)\right) \\
+&amp;= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} \operatorname{tr}(\boldsymbol{I}_p \cdot \boldsymbol{I}_p \cdot \ldots \cdot \boldsymbol{I}_p) \\
+&amp;= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) \prod_{(j_1j_2\ldots j_l) \in \mathcal{C}(\pi)} p \\
+&amp;= \sum_{\pi \in S_n} \operatorname{sgn}(\pi) p^{|\mathcal{C}(\pi)|}~.\end{aligned}\]</span></p>
+<p>In order to calculate <span class="math inline">\(\operatorname{sgn}(\pi)\)</span>, we use the known identities</p>
+<p><span class="math display">\[\begin{aligned}
+\operatorname{sgn}(\pi) &amp; = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} \operatorname{sgn}((j_1 j_2 \ldots j_l)) = \prod_{(j_1 j_2 \ldots j_l) \in \mathcal{C}(\pi)} (-1)^{l+1} = (-1)^{n+|\mathcal{C}(\pi)|}~,\end{aligned}\]</span></p>
+<p>where we have used in the last equation that the cycle lengths <span class="math inline">\(l\)</span> add up to <span class="math inline">\(n\)</span>. At this point, it is helpful to use the following combinatoric fact: The <a href="https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind">unsigned Stirling numbers of the first kind</a></p>
+<p><span class="math display">\[\begin{aligned}
+\begin{bmatrix} n \\ k \end{bmatrix} &amp; = |\{\pi \in S_n : |\mathcal{C}(\pi)| = k\}|\end{aligned}
+\]</span></p>
+<p>for <span class="math inline">\(n &gt; 0, k \geq 0\)</span> satisfy the identity</p>
+<p><span class="math display">\[\begin{aligned}
+\sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} x^k = x(x+1)\cdot \ldots \cdot (x+n-1)\end{aligned}
+\]</span></p>
+<p>for all <span class="math inline">\(x \in \mathbb{R}\)</span>.</p>
+<p>With these considerations, we can compute our expected determinant as</p>
+<p><span class="math display">\[\begin{aligned}
+\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top) &amp;= (-1)^n \sum_{\pi \in S_n} (-p)^{|\mathcal{C}(\pi)|} = (-1)^n \sum_{k=0}^n \begin{bmatrix} n \\ k \end{bmatrix} \cdot (-p)^k \\
+&amp;= (-1)^n (-p)(-p+1) \cdot \ldots \cdot (-p+n-1) \\
+&amp;= p(p-1) \cdot \ldots \cdot (p-(n-1))~,\end{aligned}
+\]</span></p>
+<p>and another application of the arithmetic-geometric mean inequality from Step 1 yields</p>
+<p><span class="math display">\[\begin{aligned}
+(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top))^{1/n} &amp;= \left(p(p-1) \cdot \ldots \cdot (p-(n-1))\right)^{1/n} \\
+&amp;\leq \frac{1}{n} (p + (p-1) + \ldots + (p-(n-1))) \\
+&amp;= p - \frac{n-1}{2}~.\end{aligned}\]</span></p>
+<p>Putting this back into the equation from Step 2, we obtain</p>
+<p><span class="math display">\[\begin{aligned}
+\mathbb{E}\operatorname{tr}((\boldsymbol{W}\boldsymbol{W}^\top)^{-1}) &amp; \geq n \left(\mathbb{E}\det(\boldsymbol{W}\boldsymbol{W}^\top)\right)^{-1/n} \geq \frac{n}{p - \frac{n-1}{2}}~.\end{aligned}
+\]</span></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
