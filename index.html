@@ -43,7 +43,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -189,10 +188,6 @@ window.Quarto = {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/dholzmueller.bsky.social"> 
-<span class="menu-text"><iconify-icon role="img" inline="" icon="simple-icons:bluesky" aria-label="Icon bluesky from simple-icons Iconify.design set." title="Icon bluesky from simple-icons Iconify.design set."></iconify-icon></span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://www.linkedin.com/in/david-holzm%C3%BCller-164a9b256/"> <i class="bi bi-linkedin" role="img">
 </i> 
@@ -227,13 +222,13 @@ window.Quarto = {
 </div>
 <section id="david-holzmüller" class="level1 g-col-12 g-col-md-9">
 <h1>David Holzmüller</h1>
-<p>I am a postdoc at INRIA Paris, working with Francis Bach and Gaël Varoquaux.</p>
+<p>I am a starting researcher in the SODA team at INRIA Saclay.</p>
 <p>E-Mail: firstname.lastname@inria.fr (replace ü by u)</p>
 </section>
 </div>
 <section id="research-interests" class="level2">
 <h2 class="anchored" data-anchor-id="research-interests">Research interests</h2>
-<p>I am currently interested in <strong>supervised learning</strong>, <strong>active learning</strong>, and <strong>uncertainty quantification</strong> with neural networks. I am interested in improving them on <strong>tabular data</strong>, but have also worked on <strong>interatomic potentials</strong> together with Viktor Zaverkin and am generally interested in AI4Science. Previously, I have also worked on <strong>theory</strong> of neural networks (neural tangent kernels, double descent, benign overfitting) and non-log-concave sampling, as well as other topics.</p>
+<p>I am currently interested in <strong>machine learning for tabular data</strong>. With my coauthors, I have recently introduced strong tabular classification and regression methods (RealMLP, TabICL, xRFM) as well as the TabArena benchmark. Additionally, I am interested in uncertainty quantificiation, active learning, and expanding the scope of meta-learned tabular foundation models. Previously, I have worked on various topics including active learning, interatomic potentials, machine learning theory (neural tangent kernels, double descent, benign overfitting, non-log-concave sampling), and other things.</p>
 <!--
 - Neural networks for tabular data (classification, regression, active learning, feature selection, ...)
 - Neural network potentials for atomistic ML (regression, active learning, transfer learning, learning on the fly, ...)
@@ -241,12 +236,22 @@ window.Quarto = {
 - Non-log-concave sampling
 -->
 </section>
-<section id="talk-topics" class="level2">
-<h2 class="anchored" data-anchor-id="talk-topics">Talk Topics:</h2>
+<section id="talks" class="level2">
+<h2 class="anchored" data-anchor-id="talks">Talks:</h2>
+<p>Tabular data</p>
 <ul>
-<li>(Introduction to) ML for tabular data</li>
-<li>Deep batch active learning for regression</li>
-<li>Generalization theory of linearized neural networks (<a href="https://www.mis.mpg.de/events/event/generalization-theory-of-linearized-neural-networks">UCLA with slides and video</a>, University of Twente, INRIA Paris)</li>
+<li>Lessons from designing better tabular neural networks (AutoML School 2025, <a href="https://www.youtube.com/watch?v=UCHJzbs27z4">YouTube</a>)</li>
+</ul>
+<p>Active learning</p>
+<ul>
+<li>Active Learning for Science (AMLAB Seminar, 2025)</li>
+</ul>
+<p>Theory</p>
+<ul>
+<li><p>Generalization theory of linearized neural networks (MPI MIS + UCLA seminar, <a href="https://www.mis.mpg.de/events/event/generalization-theory-of-linearized-neural-networks">slides and video</a>)</p>
+<!--
+older versions at INRIA Paris, University of Twente
+--></li>
 </ul>
 </section>
 <section id="papers" class="level2">
@@ -254,6 +259,13 @@ window.Quarto = {
 <section id="ml-for-tabular-data" class="level3">
 <h3 class="anchored" data-anchor-id="ml-for-tabular-data">ML for Tabular Data</h3>
 <p>David Holzmüller, Léo Grinsztajn, and Ingo Steinwart, Better by Default: Strong Pre-Tuned MLPs and Boosted Trees on Tabular Data, Neural Information Processing Systems, 2024. <a href="https://arxiv.org/abs/2407.04491" class="uri">https://arxiv.org/abs/2407.04491</a></p>
+<p>Jingang Qu, David Holzmüller, Gaël Varoquaux, and Marine Le Morvan, TabICL: A Tabular Foundation Model for In-Context Learning on Large Data, International Conference on Machine Learning, 2025. <a href="https://arxiv.org/abs/2502.05564" class="uri">https://arxiv.org/abs/2502.05564</a></p>
+<p>Nick Erickson, Lennart Purucker, Andrej Tschalzev, David Holzmüller, Prateek Mutalik Desai, David Salinas, and Frank Hutter, TabArena: A Living Benchmark for Machine Learning on Tabular Data, Neural Information Processing Systems <strong>(spotlight)</strong>, 2025. <a href="https://arxiv.org/abs/2506.16791" class="uri">https://arxiv.org/abs/2506.16791</a></p>
+<p>Daniel Beaglehole, David Holzmüller, Adityanarayanan Radhakrishnan, and Mikhail Belkin, xRFM: Accurate, scalable, and interpretable feature learning models for tabular data, arXiv:2508.10053, 2025. <a href="https://arxiv.org/abs/2508.10053" class="uri">https://arxiv.org/abs/2508.10053</a></p>
+</section>
+<section id="uncertainty-quantification" class="level3">
+<h3 class="anchored" data-anchor-id="uncertainty-quantification">Uncertainty Quantification</h3>
+<p>Eugène Berta, David Holzmüller, Michael I. Jordan, and Francis Bach, Rethinking Early Stopping: Refine, Then Calibrate, arXiv:2501.19195, 2025. <a href="https://arxiv.org/abs/2501.19195" class="uri">https://arxiv.org/abs/2501.19195</a></p>
 </section>
 <section id="active-learning" class="level3">
 <h3 class="anchored" data-anchor-id="active-learning">Active Learning</h3>
@@ -280,14 +292,27 @@ window.Quarto = {
 </section>
 <section id="other" class="level3">
 <h3 class="anchored" data-anchor-id="other">Other</h3>
+<p>Marimuthu Kalimuthu, David Holzmüller, and Mathias Niepert, LOGLO-FNO: Efficient Learning of Local and Global Features in Fourier Neural Operators, ICLR 2025 Workshop on Machine Learning Multiscale Processes <strong>(oral)</strong>, 2025.</p>
 <p>David Holzmüller and Dirk Pflüger, Fast Sparse Grid Operations Using the Unidirectional Principle: A Generalized and Unified Framework, 2021. In: Bungartz, HJ., Garcke, J., Pflüger, D. (eds) Sparse Grids and Applications - Munich 2018. Lecture Notes in Computational Science and Engineering, vol 144. Springer, Cham. <a href="https://link.springer.com/chapter/10.1007/978-3-030-81362-8_4" class="uri">https://link.springer.com/chapter/10.1007/978-3-030-81362-8_4</a></p>
 <p>Daniel F. B. Haeufle, Isabell Wochner, David Holzmüller, Danny Driess, Michael Günther, Syn Schmitt, Muscles Reduce Neuronal Information Load: Quantification of Control Effort in Biological vs.&nbsp;Robotic Pointing and Walking, 2020. <a href="https://www.frontiersin.org/articles/10.3389/frobt.2020.00077/full" class="uri">https://www.frontiersin.org/articles/10.3389/frobt.2020.00077/full</a></p>
 <p>David Holzmüller, Improved Approximation Schemes for the Restricted Shortest Path Problem, 2017. <a href="https://arxiv.org/abs/1711.00284" class="uri">https://arxiv.org/abs/1711.00284</a></p>
 <p>David Holzmüller, Efficient Neighbor-Finding on Space-Filling Curves, 2017. <a href="https://arxiv.org/abs/1710.06384" class="uri">https://arxiv.org/abs/1710.06384</a></p>
 </section>
 </section>
-<section id="newest-blog-posts" class="level2">
-<h2 class="anchored" data-anchor-id="newest-blog-posts">Newest Blog Posts</h2>
+<section id="short-cv" class="level2">
+<h2 class="anchored" data-anchor-id="short-cv">Short CV</h2>
+<ul>
+<li>since 2025: Starting researcher at INRIA Saclay, SODA team</li>
+<li>since 2023: Postdoc at INRIA Paris, co-advised by Francis Bach and Gaël Varoquaux</li>
+<li>April 2022 - July 2022: Research visit at INRIA Paris, Francis Bach</li>
+<li>2020 - 2023: PhD student at University of Stuttgart, supervised by Ingo Steinwart</li>
+<li>2016 - 2019: M.Sc. Computer Science, University of Stuttgart</li>
+<li>2015 - 2019: B.Sc. Mathematics, University of Stuttgart</li>
+<li>2013 - 2016: B.Sc. Computer Science, University of Stuttgart</li>
+</ul>
+</section>
+<section id="blog-posts" class="level2">
+<h2 class="anchored" data-anchor-id="blog-posts">Blog Posts</h2>
 <div id="listing-blog-listing" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
 <div class="g-col-1" data-index="0" data-categories="theory" data-listing-date-sort="1601935200000" data-listing-file-modified-sort="1694343164463" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2051">
@@ -314,26 +339,6 @@ Oct 6, 2020
 No matching items
 </div>
 </div>
-</section>
-<section id="short-cv" class="level2">
-<h2 class="anchored" data-anchor-id="short-cv">Short CV</h2>
-<ul>
-<li>since 2023: Postdoc at INRIA Paris, co-advised by Francis Bach and Gaël Varoquaux</li>
-<li>April 2022 - July 2022: Research visit at INRIA Paris, Francis Bach</li>
-<li>2020 - 2023: PhD student at University of Stuttgart, supervised by Ingo Steinwart</li>
-<li>2016 - 2019: M.Sc. Computer Science, University of Stuttgart</li>
-<li>2015 - 2019: B.Sc. Mathematics, University of Stuttgart</li>
-<li>2013 - 2016: B.Sc. Computer Science, University of Stuttgart</li>
-</ul>
-<!--
-# Talks
-
-# Work experience
-
-# Peer Review
-
-# CV
--->
 
 
 
